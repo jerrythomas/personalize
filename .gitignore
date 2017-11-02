@@ -1,0 +1,12 @@
+# OS generated files #
+######################
+.DS_Store
+ehthumbs.db
+Icon
+Thumbs.db
+.tmtags
+tags
+vendor.tags
+tmtagsHistory
+*.sublime-project
+*.sublime-workspace

@@ -22,6 +22,13 @@ sed 's/robbyrussel/clarity/' ~/.zshrc.old > ~/.zshrc
 brew tap caskroom/fonts 
 brew cask install font-fira-code
 
+wget https://dl.dafont.com/dl/\?f\=flottflott flottflott.zip
+unzip flottflott.zip -d flottflott
+
+mv flottflott/Flottflott.ttf ~/Library/Fonts/
+rm -rf flottflott
+rm flottflott.zip
+
 # Brew apps
 brew.zsh
 # Node libraries
@@ -30,4 +37,8 @@ node.zsh
 
 # vscode
 # hendrixer's custom css into ~/.vcode/custom folder
+ln -s /Applications/Visual Studio Code.app/Contents/Resources/app/bin/code /usr/local/bin/code 
+code --install-extension zhuangtongfa.material-theme
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension romanrei.material-dark
 cp themes/vscode.json ~/Library/Application\ Support/Code/User/settings.json

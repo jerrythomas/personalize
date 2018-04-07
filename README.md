@@ -1,20 +1,37 @@
 # Personalize
 
-Quickly configure a mac with my favourite settings.
+A mini repo to quickly set up a new mac with my preferred settings.
 
-I like to set up my mac with the following settings
+### Basics
 
 * commandline tools
 * ZSH using oh-my-zsh
 * homebrew
 
-### My Favourites
-
-Over a period of time I have come to used these packages regularly.
+Languages and packages
 
 * Terminal & ZSH theme
 * Brew packages
 * Python packages
 * R packages
 * Node libraries
-* Fira Code
+
+## Atom Editor
+
+Preview of the editor using the fonts [Fira Code](https://github.com/tonsky/FiraCode) and [Script 12 BT](https://www.wfonts.com/font/script12-bt)
+![editor](preview/editor.png)
+
+Minimal set of atom plugins
+
+* markdown preview
+* markdown pdf
+* data atom
+* hydrogen
+
+### Usage
+
+```bash
+ git clone https://github.com/jerrythomas/personalize
+ cd personalize
+ ./install.sh
+```

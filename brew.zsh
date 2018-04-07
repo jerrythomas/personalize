@@ -7,6 +7,7 @@ brew install wget
 brew install node
 brew install libssh2
 brew cask install java
+brew install p7zip
 
 # Development
 brew install llvm
@@ -27,9 +28,11 @@ brew install mariadb
 brew install python3
 brew install --build-from-source --with-python3 --fresh -vd boost boost-python
 brew install --build-from-source --with-python3 --devel -vd protobuf
-brew install numpy --with-python3
-brew install --HEAD --with-tbb --with-contrib --with-python3 opencv3
 
+brew install numpy
+brew install opencv3
+
+zsh python3.zsh
 # Julia
 brew tap homebrew/science
 brew cask install julia
@@ -39,10 +42,16 @@ brew install R
 brew install homebrew/science/rstudio-server
 brew install jpeg libpng libtiff openexr
 
+# IDE
+brew cask install caskroom/cask/intellij-idea-ce
+brew cask install atom
+
+# dependencies for bookdown
+brew install pandoc pandoc-citeproc
+brew cask install mactex
+
 # Data Sicence
 brew install vowpal-wabbit
 
 # Big Data
 brew install presto
-
-

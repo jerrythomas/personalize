@@ -1,0 +1,9 @@
+purr
+readr
+tidyr
+h2o
+feather
+ggplot2
+shiny
+rmarkdown
+formatR

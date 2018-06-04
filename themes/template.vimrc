@@ -12,3 +12,6 @@ set hidden
 " just hit backspace without this one and
 " see for yourself
 set backspace=indent,eol,start
+
+set background=dark
+colorscheme solarized

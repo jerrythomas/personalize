@@ -11,9 +11,9 @@
 function prompt_clarity_precmd {
  # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="(${_prompt_clarity_colors[1]}%b%f%u%c${_prompt_clarity_colors[4]}●%f)"
+    branch_format="(${_col[1]}%b%f%u%c${_col[4]}●%f)"
   else
-    branch_format="(${_prompt_clarity_colors[1]}%b%f%u%c)"
+    branch_format="(${_col[1]}%b%f%u%c)"
   fi
 
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
@@ -37,7 +37,7 @@ function prompt_clarity_setup {
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_clarity_precmd
 
-  _prompt_clarity_colors=(
+  _col=(
     "%F{blue}"   # default
     "%F{green}"  # host
     "%F{cyan}"   # user
@@ -49,12 +49,12 @@ function prompt_clarity_setup {
 
   # Show root user in red
   if [[ $UID -eq 0 ]]; then
-    _prompt_clarity_colors[2]="%F{red}"
+    _col[2]="%F{red}"
   fi
 
   # Show host in yellow when connected via SSH
   if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
-    _prompt_clarity_colors[2]="%F{yellow}"
+    _col[2]="%F{yellow}"
   fi
 
   # Formats:
@@ -64,10 +64,10 @@ function prompt_clarity_setup {
   #   %a - action (e.g. rebase-i)
   #   %R - repository path
   #   %S - path in the repository
-  local branch_format="(${_prompt_clarity_colors[1]} %b%f%u%c)"
-  local action_format="(${_prompt_clarity_colors[5]} %a%f)"
-  local unstaged_format="${_prompt_clarity_colors[7]} ●%f"
-  local staged_format="${_prompt_clarity_colors[5]} ●%f"
+  local branch_format="(${_col[1]} %b%f%u%c)"
+  local action_format="(${_col[5]} %a%f)"
+  local unstaged_format="${_col[7]} ●%f"
+  local staged_format="${_col[5]} ●%f"
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable bzr git hg svn
@@ -83,8 +83,8 @@ function prompt_clarity_setup {
 
   # Define prompts.
   PROMPT="
-${_prompt_clarity_colors[1]}(%f${_prompt_clarity_colors[3]}%n%f@${_prompt_clarity_colors[2]}%m%f${_prompt_clarity_colors[1]})%f in ${_prompt_clarity_colors[4]}%~%f "'${vcs_info_msg_0_}'"
-"'$python_info[virtualenv]'"${_prompt_clarity_colors[1]}❯${_prompt_clarity_colors[4]}❯%f "
+${_col[1]}┌(%f${_col[3]}%n%f@${_col[2]}%m%f${_col[1]})%f in ${_col[4]}%~%f "'${vcs_info_msg_0_}'"
+"'$python_info[virtualenv]'"${_col[1]}└❯${_col[4]}❯%f "
   RPROMPT=''
 }
 

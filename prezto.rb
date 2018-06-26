@@ -5,6 +5,7 @@ require 'fileutils'
 require 'optparse'
 
 global = FALSE
+remove = FALSE
 prompt = nil
 
 OptionParser.new do |opts|
@@ -12,6 +13,9 @@ OptionParser.new do |opts|
     opts.on('--global', 'Configure prezto for all users') do 
       global = TRUE
     end
+    opts.on('--remove', 'Remove prezto') do 
+        remove = TRUE
+      end
     opts.on('-p [ARG]', '--prompt [ARG]', "Specify the prompt style to be used") do |v|
       prompt = v
     end
@@ -25,9 +29,9 @@ git_url = "https://github.com/sorin-ionescu/prezto.git"
 
 # Use the etc configurations for global
 if global
-    zdotdir = ENV['ZDOTDIR'] || "/usr/local/prezto"
-    system("mkdir -p #{zdotdir}")
-    system("chmod o+w #{zdotdir}")
+    zdotdir = ENV['ZDOTDIR'] || "/usr/local"
+    #system("mkdir -p #{zdotdir}")
+    #system("chmod o+w #{zdotdir}")
     prefix = "/etc/"
 else 
     zdotdir = ENV['ZDOTDIR'] || ENV['HOME']
@@ -35,63 +39,93 @@ else
 end
 prezto = "#{zdotdir}/.zprezto"
 zshrc = "#{prefix}zshrc"
+#zlogin = "#{prefix}zlogin"
 
-if File.read(zshrc) =~ /ZDOTDIR/
-    text = File.read(zshrc)
-    replace = text.gsub(/(.+ZDOTDIR=).+/, "\\1#{zdotdir}")
-    File.open(zshrc, "w") { |file| file.puts replace }
-else
-    open(zshrc, 'a') { |f|
-        f.puts "export ZDOTDIR=#{zdotdir}"
-    }
-#   system("echo 'export ZDOTDIR=#{zdotdir}' >> #{zshrc}")
-end
-
-# Update if present else clone the repo
-if File.directory?("#{prezto}")  
-   #system("cd #{prezto} && git fetch --recurse-submodules")
-else
-   system("git clone --recursive #{git_url} #{prezto}")
-end
-
-# Add the configuration files
-filenames = ["zlogin", "zlogout", "zshenv"]
-filenames.each do |file|
-    unless File.file?("#{prefix}#{file}")
-        open("#{prefix}#{file}", 'a') { |f|
-            f.puts "source #{prezto}/runcoms/#{file}"
-        }
-       #system("echo 'source #{prezto}/runcoms/#{file}' > #{prefix}#{file}")
+# Create configuration files or append existing ones
+def add(filenames, srcpath, destpath, destfile = nil)
+    filenames.each do |file|
+        dest = (destfile == nil)? "#{destpath}#{file}":"#{destpath}#{destfile}"
+        unless File.file?("#{dest}") && File.read("#{dest}") =~ /runcoms\/#{file}/
+            open("#{dest}", 'a') { |f|
+                f.puts "source #{srcpath}/runcoms/#{file}"
+            }
+        end
     end
 end
 
-# Append to zshrc
-filenames = ["zpreztorc", "zshrc"]
-filenames.each do |file|
-    # avoid repeating the appended line
-    unless File.read(zshrc) =~ /runcoms\/#{file}/
-        open(zshrc, 'a') { |f|
-            f.puts "source #{prezto}/runcoms/#{file}"
-        }
+def use_home(filenames)
+    filenames.each do |filename|
+        text = File.read(filename)
+        replace = text.gsub(/(.+)ZDOTDIR:-\$(.+)/, "\\1\\2")
+        File.open(filename, "w") { |file| file.puts replace }
     end
 end
-puts("updated #{zshrc}")
 
-system("chmod o-w #{zshrc}")
-zprofile = "#{prefix}zprofile"
-unless File.read(zprofile) =~ /runcoms\/zprofile/
-    open(zprofile, 'a') { |f|
-       f.puts "source #{prezto}/runcoms/zprofile"
-    }
+def add_variable(filename, variables, values)
+    index = 0
+    data = File.read(filename) 
+    variables.each do |variable|
+        if data =~ /#{variable}=/
+            data = data.gsub(/(.+#{variable}=).+/, "\\1#{values.at(index)}")
+        else
+            data << "export #{variable}=#{values.at(index)}"
+        end
+        index = index + 1
+    end
+
+    File.open(filename, "w") { |file| file.puts data }
 end
 
-# Add the clarity theme
-FileUtils.cp("themes/prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")
-
-# Switch the prompt theme to the one specified
-unless prompt.nil?
-    zpreztorc = "#{prezto}/runcoms/zpreztorc"
-    text = File.read(zpreztorc)
-    replace = text.gsub(/(^zstyle.+ theme).+/, "\\1 '#{prompt}'")
-    File.open(zpreztorc, "w") { |file| file.puts replace }
+# Remove call to config files. Delete if empty file results
+def cleanup(filenames, patterns)    
+    filenames.each do |filename|
+        if File.file?(filename)
+            content = File.readlines(filename)
+            patterns.each do |pattern|
+            content = content.reject {|line| 
+                            line =~ /#{pattern}/ 
+                        }
+            end
+            if content.empty?
+                system("rm #{filename}")
+            else
+                File.open(filename, "w") { |f| content.each { |line| f.puts line } }
+            end
+        end
+    end
 end
+
+if (remove)
+    filenames = ["zlogin", "zlogout", "zshenv", "zshrc" ,"zprofile"]
+    filenames.each { |s| s.prepend("#{prefix}") }
+    cleanup(filenames, ["source .+runcoms\/z.+","^export ZDOTDIR=", "^export HISTFILE="])
+    if File.directory?(prezto)
+        system("rm -r #{prezto}")
+    end
+else
+    if File.directory?(prezto)  
+        #system("cd #{prezto} && git fetch --recurse-submodules")
+    else 
+        system("git clone --recursive #{git_url} #{prezto}")
+    end
+    # use home folder for zcompdump
+    # zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+    use_home(["#{prezto}/runcoms/zlogin"])
+    
+    add_variable(zshrc, ["ZDOTDIR"],["#{zdotdir}"])
+    add(["zlogin", "zlogout", "zshenv", "zprofile"], "#{prezto}", "#{prefix}")
+    add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}","zshrc")
+    add_variable("#{prefix}/zshrc", ["HISTFILE"],["$HOME/.zhistory"])
+
+    # Add the clarity theme
+    FileUtils.cp("themes/prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")
+
+    # Switch the prompt theme to the one specified
+    unless prompt.nil?
+        zpreztorc = "#{prezto}/runcoms/zpreztorc"
+        text = File.read(zpreztorc)
+        replace = text.gsub(/(^zstyle.+ theme).+/, "\\1 '#{prompt}'")
+        File.open(zpreztorc, "w") { |file| file.puts replace }
+    end
+end
+#system("chmod o-w #{zshrc}")

@@ -9,7 +9,7 @@ done
 
 VIRTUAL_ENV=$HOME/Applications/$1
 
-if [ ${update} -eq 'true' ]  && [ -f $VIRTUAL_ENV/bin/activate ]
+if [ ${update} = 'true' ]  && [ -f $VIRTUAL_ENV/bin/activate ]
 then
     source $VIRTUAL_ENV/bin/activate
     pip freeze > $HOME/$1_requirements.txt

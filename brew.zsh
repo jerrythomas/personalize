@@ -1,12 +1,11 @@
 #!/bin/zsh
 # Basics
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 brew install rlwrap
-brew install apache-spark
-brew install storm
 brew install wget
 brew install node
 brew install libssh2
-brew cask install java
 brew install p7zip
 
 # Development
@@ -23,35 +22,21 @@ brew install libomp
 brew install postgresql
 brew install mongodb
 brew install mariadb
-
-# Python 3
-brew install python3
-brew install --build-from-source --with-python3 --fresh -vd boost boost-python
-brew install --build-from-source --with-python3 --devel -vd protobuf
-
-brew install numpy
-brew install opencv3
-
-zsh python3.zsh
-# Julia
-brew tap homebrew/science
-brew cask install julia
-
-# R
-brew install R
-brew install homebrew/science/rstudio-server
-brew install jpeg libpng libtiff openexr
-
-# IDE
-brew cask install caskroom/cask/intellij-idea-ce
-brew cask install atom
-
-# dependencies for bookdown
-brew install pandoc pandoc-citeproc
-brew cask install mactex
-
-# Data Sicence
-brew install vowpal-wabbit
-
+brew install cassandra
 # Big Data
 brew install presto
+
+brew cask install robo-3t
+brew cask install pgadmin-4
+brew cask install docker
+brew cask install virtualbox
+
+# Julia
+brew cask install julia
+
+
+
+
+
+# Data Science
+#brew install vowpal-wabbit

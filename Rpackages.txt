@@ -1,6 +1,4 @@
-purr
-readr
-tidyr
+tidyverse
 h2o
 feather
 ggplot2

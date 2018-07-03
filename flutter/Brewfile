@@ -1,5 +1,5 @@
 tap "homebrew/cask"
-brew "mas"
+#brew "mas"
 cask "java8"
 brew "jenv"
 brew "libimobiledevice"
@@ -9,6 +9,6 @@ brew "cocoapods"
 cask "android-sdk"
 cask "android-ndk"
 cask "intel-haxm"
-cask "intellij-idea-ce"
-cask "visual-studio-code"
-#mas "XCode", id: 497799835
+#cask "intellij-idea-ce"
+#cask "visual-studio-code"
+mas "XCode", id: 497799835

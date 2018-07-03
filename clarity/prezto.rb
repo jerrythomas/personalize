@@ -114,9 +114,9 @@ else
 
     add_variable(zshrc, ["ZDOTDIR"],["#{zdotdir}"])
     add(["zlogin", "zlogout", "zshenv", "zprofile"], "#{prezto}", "#{prefix}")
-    add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}","zshrc")
-    add_variable("#{prefix}/zshrc", ["HISTFILE"],["$HOME/.zhistory"])
-    add_variable("#{prefix}/zshrc", ["EDITOR"],["vi"])
+    add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}", "zshrc")
+    add_variable("#{prefix}/zshrc", ["HISTFILE"], ["$HOME/.zhistory"])
+    add_variable("#{prefix}/zshrc", ["EDITOR"], ["vi"])
 
     # Add the clarity theme
     FileUtils.cp("themes/prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")

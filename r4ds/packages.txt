@@ -1,7 +1,9 @@
 tidyverse
 h2o
 feather
-ggplot2
 shiny
 rmarkdown
+bookdown
+blogdown
 formatR
+reticulate

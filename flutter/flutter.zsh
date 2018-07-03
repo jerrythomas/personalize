@@ -1,20 +1,34 @@
 #!/usr/bin/env zsh
-brew tap homebrew/cask
-brew cask install homebrew/cask-versions/java8
+#brew tap homebrew/cask
+#brew cask install homebrew/cask-versions/java8
+#brew cask install jenv
+brew bundle install
+mas signin --dialog $1
+mas install 497799835 #XCode
 
-brew install --HEAD libimobiledevice
-brew install ideviceinstaller
-brew install ios-deploy
-brew install cocoapods
+jdk8=`/usr/libexec/java_home -v 1.8`
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(jenv init -)"' >> ~/.zshrc
+jenv add $jdk8
+jenv global 1.8
+
+source ~/.zshrc
+
+#brew install mas
+#brew install --HEAD libimobiledevice
+#brew install ideviceinstaller
+#brew install ios-deploy
+#brew install cocoapods
 pip install six
 pod setup
 
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+#sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
 
 #export PATH=$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | sort | tail -1):$PATH
-brew cask install android-sdk
-brew cask install android-ndk
-brew cask install intel-haxm
+
+#brew cask install android-sdk
+#brew cask install android-ndk
+#brew cask install intel-haxm
 
 sdkmanager "tools"
 sdkmanager "platform-tools"
@@ -33,6 +47,7 @@ echo 'export PATH=${PATH}:$ANDROID_HOME/tools'>> ~/.zprofile
 echo 'export PATH=${PATH}:$ANDROID_HOME/platform-tools' >> ~/.zprofile
 source ~/.zprofile
 
+flutter upgrade
 flutter doctor --android-licenses
 
 #sdkmanager --update

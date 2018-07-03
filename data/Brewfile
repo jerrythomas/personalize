@@ -1,0 +1,10 @@
+# Databases
+brew "postgresql"
+brew "mongodb"
+brew "mariadb"
+brew "cassandra"
+# Big Data
+brew "presto"
+
+cask "robo-3t"
+cask "pgadmin-4"

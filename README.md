@@ -32,6 +32,19 @@ Minimal set of atom plugins
 
 ```bash
  git clone https://github.com/jerrythomas/personalize
+
  cd personalize
- ./install.sh
+
+ . ./brew.zsh
+ . ./node.zsh
+ . ./java.zsh
+
+ cd atom & . ./atom.zsh
+ cd ../cloud & brew bundle install
+ cd ../data & brew bundle install
+ cd ../r4ds & . ./r4ds.zsh
+ cd ../py4ds & . ./python3.zsh
+ cd ../flutter & brew install ./flutter.rb
+ cd ..
+
 ```

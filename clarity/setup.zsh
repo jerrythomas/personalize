@@ -75,4 +75,4 @@ if [ -f ~/.vimrc ]; then
 fi
 cp themes/template.vimrc ~/.vimrc
 
-sudo ruby presto.rb --global --prompt clarity
+sudo ruby prezto.rb --global --prompt clarity

@@ -10,21 +10,21 @@ prompt = nil
 
 OptionParser.new do |opts|
     opts.banner = "Usage: prezto [options]"
-    opts.on('--global', 'Configure prezto for all users') do 
+    opts.on('--global', 'Configure prezto for all users') do
       global = TRUE
     end
-    opts.on('--remove', 'Remove prezto') do 
+    opts.on('--remove', 'Remove prezto') do
         remove = TRUE
       end
     opts.on('-p [ARG]', '--prompt [ARG]', "Specify the prompt style to be used") do |v|
       prompt = v
     end
-    opts.on('-h', '--help', 'Display this help') do 
+    opts.on('-h', '--help', 'Display this help') do
       puts opts
       exit
     end
 end.parse!
-  
+
 git_url = "https://github.com/sorin-ionescu/prezto.git"
 
 # Use the etc configurations for global
@@ -33,7 +33,7 @@ if global
     #system("mkdir -p #{zdotdir}")
     #system("chmod o+w #{zdotdir}")
     prefix = "/etc/"
-else 
+else
     zdotdir = ENV['ZDOTDIR'] || ENV['HOME']
     prefix = "#{zdotdir}/."
 end
@@ -63,7 +63,7 @@ end
 
 def add_variable(filename, variables, values)
     index = 0
-    data = File.read(filename) 
+    data = File.read(filename)
     variables.each do |variable|
         if data =~ /#{variable}=/
             data = data.gsub(/(.+#{variable}=).+/, "\\1#{values.at(index)}")
@@ -77,13 +77,13 @@ def add_variable(filename, variables, values)
 end
 
 # Remove call to config files. Delete if empty file results
-def cleanup(filenames, patterns)    
+def cleanup(filenames, patterns)
     filenames.each do |filename|
         if File.file?(filename)
             content = File.readlines(filename)
             patterns.each do |pattern|
-            content = content.reject {|line| 
-                            line =~ /#{pattern}/ 
+            content = content.reject {|line|
+                            line =~ /#{pattern}/
                         }
             end
             if content.empty?
@@ -103,19 +103,20 @@ if (remove)
         system("rm -r #{prezto}")
     end
 else
-    if File.directory?(prezto)  
+    if File.directory?(prezto)
         #system("cd #{prezto} && git fetch --recurse-submodules")
-    else 
+    else
         system("git clone --recursive #{git_url} #{prezto}")
     end
     # use home folder for zcompdump
     # zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
     use_home(["#{prezto}/runcoms/zlogin"])
-    
+
     add_variable(zshrc, ["ZDOTDIR"],["#{zdotdir}"])
     add(["zlogin", "zlogout", "zshenv", "zprofile"], "#{prezto}", "#{prefix}")
-    add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}","zshrc")
-    add_variable("#{prefix}/zshrc", ["HISTFILE"],["$HOME/.zhistory"])
+    add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}", "zshrc")
+    add_variable("#{prefix}/zshrc", ["HISTFILE"], ["$HOME/.zhistory"])
+    add_variable("#{prefix}/zshrc", ["EDITOR"], ["vi"])
 
     # Add the clarity theme
     FileUtils.cp("themes/prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")

@@ -1,0 +1,9 @@
+tidyverse
+h2o
+feather
+shiny
+rmarkdown
+bookdown
+blogdown
+formatR
+reticulate

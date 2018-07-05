@@ -1,0 +1,5 @@
+brew "heroku"
+cask "docker"
+cask "virtualbox"
+brew "awscli"
+cask "google-cloud-sdk"

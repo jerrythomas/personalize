@@ -1,0 +1,13 @@
+brew "pandoc"
+brew "pandoc-citeproc"
+brew "jpeg"
+brew "libpng"
+brew "libtiff"
+brew "openexr"
+cask "mactex"
+brew "h2o"
+
+# R
+brew "R"
+tap "randy3k/r"
+brew "rstudio-server"

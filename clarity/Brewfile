@@ -1,0 +1,23 @@
+tap "caskroom/fonts"
+cask "font-fira-code"
+cask "font-firacode-nerd-font"
+
+# Cursive font Script 12 BT
+cask "./font-script12-bt.rb"
+
+brew "rlwrap"
+brew "wget"
+brew "libssh2"
+brew "p7zip"
+
+# Development
+brew "llvm"
+brew "gfortran"
+brew "gcc", args: ["without-multilib"]
+brew "lpSolve"
+
+# Parallel processing
+brew "libomp"
+
+# Mac app store command line
+brew "mas"

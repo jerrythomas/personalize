@@ -101,12 +101,25 @@ class Flutter < Formula
 
       sdkmanager "tools"
       sdkmanager "platform-tools"
-      sdkmanager "build-tools;27.0.3"
-      sdkmanager "platforms;android-27"
+      sdkmanager "build-tools;28.0.1"
+      sdkmanager "platforms;android-28"
+      sdkmanager "system-images;android-28;google_apis;x86"
+      sdkmanager "emulator"
       sdkmanager "extras;android;m2repository"
       sdkmanager "extras;google;m2repository"
       sdkmanager "patcher;v4"
+      mkdir -p $HOME/Library/Android
 
+      if [ -h $HOME/Library/Android/sdk ]; then
+         dest=`stat -f %Y $HOME/Library/Android/sdk`
+         if [ $dest != "$ANDROID_SDK_HOME/" ]; then
+            mv $HOME/Library/Android/sdk ~/.Trash
+            ln -s $ANDROID_SDK_HOME $HOME/Library/Android/sdk
+         fi
+      else
+         mv $HOME/Library/Android/sdk ~/.Trash
+         ln -s $ANDROID_SDK_HOME $HOME/Library/Android/sdk 
+      fi
       pip install six
 
       echo "Accept XCode license. Sudo login"

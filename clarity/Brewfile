@@ -12,12 +12,11 @@ brew "p7zip"
 
 # Development
 brew "llvm"
-brew "gfortran"
 brew "gcc", args: ["without-multilib"]
-brew "lpSolve"
 
 # Parallel processing
 brew "libomp"
 
 # Mac app store command line
 brew "mas"
+

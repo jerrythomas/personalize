@@ -1,0 +1,25 @@
+[
+ {
+  "app":"com.apple.driver.AppleBluetoothMultitouch.trackpad",
+  "settings":[
+	  {"key":  "TrackpadThreeFingerDrag","type":"bool","value":true},
+    {"key":"Clicking","type":"bool" , "value":true}
+  ]
+},
+{"app":"com.apple.AppleMultitouchTrackpad",
+"settings":[
+  {"key":  "TrackpadThreeFingerDrag","type":"bool","value":true},
+  {"key":"Clicking","type":"bool" , "value":true}
+  ]},
+  {
+    "app":"com.apple.driver.AppleBluetoothMultitouch.mouse",
+    "settings":[ {"key":"MouseButtonMode","type":"string","value":"TwoButton"}]
+  },
+  {
+    "app":"NSGlobalDomain",
+    "settings":[
+      {"key":"com.apple.mouse.tapBehavior","type":"int" , "value":1}
+
+    ]
+  }
+]

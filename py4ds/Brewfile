@@ -1,0 +1,7 @@
+brew "python3"
+brew "numpy"
+brew "opencv3"
+brew "protobuf"
+brew "boost-python3"
+brew "tesseract", args: ['HEAD']
+brew "apache-arrow"

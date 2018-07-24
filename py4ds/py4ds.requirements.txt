@@ -1,0 +1,14 @@
+jupyter
+jupyterlab
+notebook
+numpy
+scipy
+pandas
+matplotlib
+seaborn
+scikit-learn
+bs4
+keras
+theano
+tensorflow
+pyarrow

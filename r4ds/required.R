@@ -7,5 +7,18 @@ install <- function(packages){
 }
 
 # usage
+
 required.packages <- c("ggplot2", "dplyr", "reshape2", "devtools", "shiny", "shinydashboard", "caret","randomForest","gbm","tm","forecast","knitr","Rcpp","stringr","lubridate","manipulate","Scale","sqldf","RMongo","foreign","googleVis","XML","roxygen2","plotly","parallel","car")
+
 install(required.packages)
+
+update.packages(ask = FALSE, checkBuilt = TRUE)
+
+
+broken = names(which(
+  sapply(.packages(TRUE), function(i) {
+    system2('Rscript', c('-e', shQuote(sprintf('library(%s)', i))))
+  }) != 0
+))
+
+if (length(broken)) install.packages(broken)

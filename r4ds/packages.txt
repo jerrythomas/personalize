@@ -1,9 +1,16 @@
-tidyverse
-h2o
-feather
-shiny
-rmarkdown
-bookdown
-blogdown
-formatR
-reticulate
+package,required_for,purpose
+tidyverse,,
+h2o,,
+feather,,
+shiny,,
+rmarkdown,,
+bookdown,,
+blogdown,,
+formatR,,
+reticulate,python,
+xtable,xaringan,live preview
+sourcetools,xaringan,live preview
+tinyUI,xaringan,live preview
+shiny,xaringan,live preview
+leaflet,xaringan,live preview
+DT,xaringan,live preview

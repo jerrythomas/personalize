@@ -8,3 +8,4 @@ brew "presto"
 
 cask "robo-3t"
 cask "pgadmin-4"
+cask "mongodb-compass"

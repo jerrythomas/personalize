@@ -1,0 +1,8 @@
+cask "atom"
+cask "visual-studio-code"
+cask "intellij-idea-ce"
+brew "jenv"
+brew "rbenv"
+tap "caskroom/versions"
+cask "java8"
+brew "drawio"

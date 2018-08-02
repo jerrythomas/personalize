@@ -2,16 +2,26 @@
 # check success of shell scripts.
 
 # Python 3
-brew install python3
-brew install --build-from-source --with-python3 --fresh -vd boost boost-python
-brew install --build-from-source --with-python3 --devel -vd protobuf
-brew install numpy
-brew install opencv3
+vanilla='false'
+VENV_NAME=Python3
+
+while getopts 've:' flag; do
+  case "${flag}" in
+    v) vanilla='true';;
+    e) VENV_NAME="${OPTARG}" ;;
+    *) error "Unexpected option ${flag}" ;;
+  esac
+done
+
+brew bundle install
 
 pip3 install virtualenv
 
-virtualenv -p python3 $HOME/Applications/Python3
-source $HOME/Applications/Python3/bin/activate
+virtualenv -p python3 $HOME/Applications/$VENV_NAME
+source $HOME/Applications/$VENV_NAME/bin/activate
 
 pip install jupyter notebook
-zsh opencv.zsh Python3
+if [ ${vanilla} = 'false' ]
+then
+   . ./opencv.zsh -e $VENV_NAME
+fi

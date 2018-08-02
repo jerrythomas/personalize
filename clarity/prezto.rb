@@ -119,7 +119,7 @@ else
     add_variable("#{prefix}/zshrc", ["EDITOR"], ["vi"])
 
     # Add the clarity theme
-    FileUtils.cp("themes/prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")
+    FileUtils.cp("prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")
 
     # Switch the prompt theme to the one specified
     unless prompt.nil?

@@ -3,9 +3,11 @@ brew "postgresql"
 brew "mongodb"
 brew "mariadb"
 brew "cassandra"
+cask "couchbase-server-community"
+
 # Big Data
 brew "presto"
 
 cask "robo-3t"
-cask "pgadmin-4"
+cask "pgadmin4"
 cask "mongodb-compass"

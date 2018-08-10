@@ -3,6 +3,17 @@ cask "visual-studio-code"
 cask "intellij-idea-ce"
 brew "jenv"
 brew "rbenv"
+brew "yarn"
+brew "cookiecutter"
 tap "caskroom/versions"
 cask "java8"
-brew "drawio"
+cask "drawio"
+
+# Development
+brew "llvm"
+brew "gcc", args: ["without-multilib"]
+
+# Parallel processing
+brew "libomp"
+
+cask "devdocs"

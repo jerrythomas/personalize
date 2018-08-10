@@ -39,7 +39,6 @@ else
 end
 prezto = "#{zdotdir}/.zprezto"
 zshrc = "#{prefix}zshrc"
-#zlogin = "#{prefix}zlogin"
 
 # Create configuration files or append existing ones
 def add(filenames, srcpath, destpath, destfile = nil)
@@ -53,6 +52,7 @@ def add(filenames, srcpath, destpath, destfile = nil)
     end
 end
 
+# Switch zdotdir base with the home variable
 def use_home(filenames)
     filenames.each do |filename|
         text = File.read(filename)
@@ -61,6 +61,7 @@ def use_home(filenames)
     end
 end
 
+# add a variable to the config file
 def add_variable(filename, variables, values)
     index = 0
     data = File.read(filename)
@@ -95,6 +96,7 @@ def cleanup(filenames, patterns)
     end
 end
 
+# Clean up mode. Removing presto
 if (remove)
     filenames = ["zlogin", "zlogout", "zshenv", "zshrc" ,"zprofile"]
     filenames.each { |s| s.prepend("#{prefix}") }
@@ -110,13 +112,17 @@ else
     end
     # use home folder for zcompdump
     # zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+    cp("../py4ds/pyopencv.zsh", "#{prezto}/runcoms/")
     use_home(["#{prezto}/runcoms/zlogin"])
 
     add_variable(zshrc, ["ZDOTDIR"],["#{zdotdir}"])
     add(["zlogin", "zlogout", "zshenv", "zprofile"], "#{prezto}", "#{prefix}")
     add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}", "zshrc")
+    add(["zshrc"],"pyopencv.zsh")
     add_variable("#{prefix}/zshrc", ["HISTFILE"], ["$HOME/.zhistory"])
     add_variable("#{prefix}/zshrc", ["EDITOR"], ["vi"])
+    add_variable("#{prefix}/zshrc", ["LC_ALL"], ["en_US.UTF-8"])
+    add_variable("#{prefix}/zshrc", ["LANG"], ["en_US.UTF-8"])
 
     # Add the clarity theme
     FileUtils.cp("prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")

@@ -6,7 +6,7 @@ brew "libtiff"
 brew "openexr"
 cask "mactex"
 brew "h2o"
-
+#brew "tcl-tk"  resolve tcltk R issue
 # R
 brew "R"
 tap "randy3k/r"

@@ -1,5 +1,5 @@
 #!/bin/zsh
-brew cask install atom
+brew bundle install
 
 if [ ! -d ~/.atom ]; then
   mkdir -p ~/.atom
@@ -7,18 +7,19 @@ fi
 
 count=1
 if [ -f ~/.atom/styles.less ]; then
-   count=`diff ~/.atom/styles.less ~/Code/personalize/themes/styles.less | wc -l`
+   count=`diff ~/.atom/styles.less styles.less | wc -l`
    if [ $count -gt 0 ]; then
       mv ~/.atom/styles.less ~/.atom/styles.old
    fi
 fi
 if [ $count -gt 0 ]; then
-   cp themes/styles.less ~/.atom
+   cp styles.less ~/.atom
 fi
 
 apm install atom-icons
 apm install data-atom
-apm install python-autopep8
+apm install atom-language-r
+#apm install python-autopep8
 
 # hydrogen requires python 2
 

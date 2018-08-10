@@ -10,13 +10,8 @@ brew "wget"
 brew "libssh2"
 brew "p7zip"
 
-# Development
-brew "llvm"
-brew "gcc", args: ["without-multilib"]
-
-# Parallel processing
-brew "libomp"
-
 # Mac app store command line
 brew "mas"
 
+# Chrome Browser
+cask "google-chrome"

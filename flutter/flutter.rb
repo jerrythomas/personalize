@@ -6,9 +6,9 @@ class Flutter < Formula
   #head "https://github.com/flutter/flutter.git"
   url "https://github.com/flutter/flutter.git",
       :using => :git,
-      :tag => "v0.5.6",
+      :tag => "v0.5.7",
       :branch => "master",
-      :revision => "472bbccf756e7954af2a81d2c8abc46d65a570af"
+      :revision => "66091f969653fd3535b265ddcd87436901858a1d"
 
   option "without-visual-studio-code", "Disable Visual Studio Code."
   option "with-android-studio", "Enable Android Studio."
@@ -118,7 +118,7 @@ class Flutter < Formula
          fi
       else
          mv $HOME/Library/Android/sdk ~/.Trash
-         ln -s $ANDROID_SDK_HOME $HOME/Library/Android/sdk 
+         ln -s $ANDROID_SDK_HOME $HOME/Library/Android/sdk
       fi
       pip install six
 

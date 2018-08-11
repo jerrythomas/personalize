@@ -1,0 +1,10 @@
+Hydrogen
+atom-icons
+atom-language-r
+data-atom
+language-docker
+language-dotenv
+language-markdown
+pandoc
+pandoc-convert
+seti-icons

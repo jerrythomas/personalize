@@ -6,6 +6,7 @@ brew "libtiff"
 brew "openexr"
 cask "mactex"
 brew "h2o"
+brew "libgit2"  # required for git2r & devtools
 #brew "tcl-tk"  resolve tcltk R issue
 # R
 brew "R"

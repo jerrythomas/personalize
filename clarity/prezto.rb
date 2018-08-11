@@ -41,7 +41,7 @@ prezto = "#{zdotdir}/.zprezto"
 zshrc = "#{prefix}zshrc"
 
 # Create configuration files or append existing ones
-def add(filenames, srcpath, destpath, destfile = nil)
+def ref_runcoms_scripts(filenames, srcpath, destpath, destfile = nil)
     filenames.each do |file|
         dest = (destfile == nil)? "#{destpath}#{file}":"#{destpath}#{destfile}"
         unless File.file?("#{dest}") && File.read("#{dest}") =~ /runcoms\/#{file}/
@@ -53,7 +53,7 @@ def add(filenames, srcpath, destpath, destfile = nil)
 end
 
 # Switch zdotdir base with the home variable
-def use_home(filenames)
+def use_home_instead_of_zdotdir(filenames)
     filenames.each do |filename|
         text = File.read(filename)
         replace = text.gsub(/(.+)ZDOTDIR:-\$(.+)/, "\\1\\2")
@@ -110,19 +110,21 @@ else
     else
         system("git clone --recursive #{git_url} #{prezto}")
     end
-    # use home folder for zcompdump
-    # zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+    cp("history.zsh", "#{prezto}/runcoms/")
     cp("../py4ds/pyopencv.zsh", "#{prezto}/runcoms/")
-    use_home(["#{prezto}/runcoms/zlogin"])
+
+    # use $HOME instead of ${ZDOTDIR:-$HOME} for zcompdump
+    use_home_instead_of_zdotdir(["#{prezto}/runcoms/zlogin"])
 
     add_variable(zshrc, ["ZDOTDIR"],["#{zdotdir}"])
-    add(["zlogin", "zlogout", "zshenv", "zprofile"], "#{prezto}", "#{prefix}")
-    add(["zpreztorc","zshrc"],  "#{prezto}", "#{prefix}", "zshrc")
-    add(["zshrc"],"pyopencv.zsh")
-    add_variable("#{prefix}/zshrc", ["HISTFILE"], ["$HOME/.zhistory"])
-    add_variable("#{prefix}/zshrc", ["EDITOR"], ["vi"])
-    add_variable("#{prefix}/zshrc", ["LC_ALL"], ["en_US.UTF-8"])
-    add_variable("#{prefix}/zshrc", ["LANG"], ["en_US.UTF-8"])
+
+    ref_runcoms_scripts(["zlogin", "zlogout", "zshenv", "zprofile"],
+                        "#{prezto}",
+                        "#{prefix}")
+    ref_runcoms_scripts(["zpreztorc", "zshrc", "pyopencv.zsh", "history.zsh"],
+                        "#{prezto}",
+                        "#{prefix}",
+                        "zshrc")
 
     # Add the clarity theme
     FileUtils.cp("prompt_clarity_setup", "#{prezto}/modules/prompt/functions/")
@@ -135,4 +137,4 @@ else
         File.open(zpreztorc, "w") { |file| file.puts replace }
     end
 end
-#system("chmod o-w #{zshrc}")
+system("chmod o-w #{zshrc}")

@@ -121,7 +121,7 @@ else
     ref_runcoms_scripts(["zlogin", "zlogout", "zshenv", "zprofile"],
                         "#{prezto}",
                         "#{prefix}")
-    ref_runcoms_scripts(["zpreztorc", "zshrc", "pyopencv.zsh", "history.zsh"],
+    ref_runcoms_scripts(["zpreztorc", "zshrc", "clarity.zsh"],
                         "#{prezto}",
                         "#{prefix}",
                         "zshrc")

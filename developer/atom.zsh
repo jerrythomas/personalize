@@ -22,4 +22,8 @@ if [ $ver -ne 2 ]
 then
    export PATH=`which python2`:$PATH
 fi
-apm install --packages-file atom-packages.txt
+
+apm install --packages-file atom-package-list.txt
+cat vscode-extensions.txt | xargs -L 1 code --install-extension
+
+cp code-settings.json ~/Library/Application\ Support/Code/User/settings.json

@@ -1,0 +1,7 @@
+{
+    "editor.fontFamily": "Fura Code Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on"
+}

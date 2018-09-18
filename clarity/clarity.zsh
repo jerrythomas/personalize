@@ -24,8 +24,14 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
 
-function dotenv{
-  `sed -e 's/^/export /' .env`
+function dotenv {
+  script=".dotenv.sh"
+  if [ -f $script ]; then
+    rm -f $script
+  fi
+  sed -e 's/^/export /' .env > $script
+  . ./$script
+  rm -f $script
 }
 
 function pyopencv {
@@ -44,4 +50,40 @@ function pyopencv {
   VERSION=`ls $VENV/lib/ | grep python`
   ORIG=`brew ls opencv3 | grep $VERSION | grep site-packages`
   ln -s $ORIG $VENV/lib/$VERSION/site-packages/cv2.so
+}
+
+# List or create a file with the current atom packages
+function atom_package_list() {
+  if [ $# -eq 0 ]
+  then
+    apm list --installed --bare | grep '^[^@]\+' -o
+  else
+    PKG_FILE=$1
+    if [ -f $PKG_FILE ]; then
+       rm -f $PKG_FILE
+    fi
+    apm list --installed --bare | grep '^[^@]\+' -o > $PKG_FILE
+  fi
+}
+
+function grep_history() {
+  if [ $# -eq 0 ]
+  then
+    history
+  else
+    WORDS="$@"
+    cat $HISTFILE | cut -d";" -f2 | grep $WORDS
+  fi
+}
+
+function angular() {
+  #statements
+  project=$1
+  ng new $project --style=scss --routing
+  cd $project
+
+  #sed -i -e 's/targets/architect/g' angular.json
+  ng add @angular/pwa
+  ng add @angular/material
+  npm install --save @angular/material @angular/cdk @angular/animations hammerjs
 }

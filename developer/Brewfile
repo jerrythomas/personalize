@@ -1,19 +1,29 @@
-cask "atom"
-cask "visual-studio-code"
-cask "intellij-idea-ce"
+# Taps
+tap "caskroom/versions"
+tap "grpc/grpc"
+
 brew "jenv"
 brew "rbenv"
+brew "pyenv"
+brew "nvm"
 brew "yarn"
 brew "cookiecutter"
-tap "caskroom/versions"
-cask "java8"
-cask "drawio"
 
 # Development
 brew "llvm"
 brew "gcc", args: ["without-multilib"]
+brew "grpc", args: ["with-plugins"]
+brew "go", args: ["cross-compile-common"]
 
 # Parallel processing
 brew "libomp"
 
-cask "devdocs"
+cask "atom"
+cask "visual-studio-code"
+cask "intellij-idea-ce"
+
+cask "java8"
+cask "drawio"
+
+
+#cask "devdocs"

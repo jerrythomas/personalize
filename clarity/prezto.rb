@@ -3,6 +3,7 @@
 require 'uri'
 require 'fileutils'
 require 'optparse'
+require '../functions/add_variable'
 
 global = FALSE
 remove = FALSE
@@ -61,22 +62,6 @@ def use_home_instead_of_zdotdir(filenames)
     end
 end
 
-# add a variable to the config file
-def add_variable(filename, variables, values)
-    index = 0
-    data = File.read(filename)
-    variables.each do |variable|
-        if data =~ /#{variable}=/
-            data = data.gsub(/(.+#{variable}=).+/, "\\1#{values.at(index)}")
-        else
-            data << "export #{variable}=#{values.at(index)}"
-        end
-        index = index + 1
-    end
-
-    File.open(filename, "w") { |file| file.puts data }
-end
-
 # Remove call to config files. Delete if empty file results
 def cleanup(filenames, patterns)
     filenames.each do |filename|
@@ -110,9 +95,8 @@ else
     else
         system("git clone --recursive #{git_url} #{prezto}")
     end
-    cp("history.zsh", "#{prezto}/runcoms/")
-    cp("../py4ds/pyopencv.zsh", "#{prezto}/runcoms/")
-
+    FileUtils.cp("clarity.zsh", "#{prezto}/runcoms/")
+    
     # use $HOME instead of ${ZDOTDIR:-$HOME} for zcompdump
     use_home_instead_of_zdotdir(["#{prezto}/runcoms/zlogin"])
 

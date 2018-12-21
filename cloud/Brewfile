@@ -3,3 +3,8 @@ cask "docker"
 cask "virtualbox"
 brew "awscli"
 cask "google-cloud-sdk"
+brew "elasticsearch"
+brew "apm-server"
+brew "filebeat"
+brew "kibana"
+

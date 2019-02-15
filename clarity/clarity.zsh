@@ -11,11 +11,21 @@ export LC_ALL="en_US.UTF-8"
 export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
 # History settings
 export HISTFILE=$HOME/.zhistory
 export EDITOR=vi
 export HISTSIZE=50000
 export SAVEHIST=10000
+
+# Fix compilation issue for Rxml2
+if [ -d "/usr/local/opt/libxml2" ]
+then
+  export PATH="/usr/local/opt/libxml2/bin:$PATH"
+  export LDFLAGS="-L/usr/local/opt/libxml2/lib"
+  export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+  export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
+fi
 
 ## History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
@@ -26,6 +36,7 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
 
+# set private environment variables for project
 function dotenv {
   script=".dotenv.sh"
   if [ -f $script ]; then
@@ -50,7 +61,7 @@ function pyopencv {
 
   VENV=`pipenv --venv`
   VERSION=`ls $VENV/lib/ | grep python`
-  ORIG=`brew ls opencv3 | grep $VERSION | grep site-packages`
+  ORIG=`brew ls opencv3 | grep $VERSION | grep .so | grep site-packages`
   ln -s $ORIG $VENV/lib/$VERSION/site-packages/cv2.so
 }
 
@@ -74,18 +85,23 @@ function grep_history() {
     history
   else
     WORDS="$@"
-    cat $HISTFILE | cut -d";" -f2 | grep $WORDS
+    cat $HISTFILE | cut -d";" -f2 | grep "$WORDS"
   fi
 }
 
+# Create a fresh angular project with material theme
 function angular() {
-  #statements
   project=$1
   ng new $project --style=scss --routing
   cd $project
 
-  #sed -i -e 's/targets/architect/g' angular.json
   ng add @angular/pwa
   ng add @angular/material
-  npm install --save @angular/material @angular/cdk @angular/animations hammerjs
+  # Install missing peer dependencies (ajv)  
+  npm install --save @angular/material @angular/cdk @angular/animations hammerjs ajv
+}
+
+# Upgrade all outdated global packages
+function ncu-g() {
+  `ncu -g | grep "npm -g"`
 }

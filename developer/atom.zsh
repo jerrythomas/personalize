@@ -24,6 +24,6 @@ then
 fi
 
 apm install --packages-file atom-package-list.txt
-cat vscode-extensions.txt | xargs -L 1 code --install-extension
+#cat vscode-extensions.txt | xargs -L 1 code --install-extension
 
-cp code-settings.json ~/Library/Application\ Support/Code/User/settings.json
+#cp code-settings.json ~/Library/Application\ Support/Code/User/settings.json

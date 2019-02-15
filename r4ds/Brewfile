@@ -6,6 +6,8 @@ brew "libtiff"
 brew "openexr"
 cask "mactex"
 brew "h2o"
+brew "libxml2"  # required for tidyverse
+brew "udunits"  # required for ggforce
 brew "libgit2"  # required for git2r & devtools
 #brew "tcl-tk"  resolve tcltk R issue
 # R

@@ -96,7 +96,8 @@ else
         system("git clone --recursive #{git_url} #{prezto}")
     end
     FileUtils.cp("clarity.zsh", "#{prezto}/runcoms/")
-    
+    FileUtils.cp("husky.json", "#{prezto}/runcoms/")
+
     # use $HOME instead of ${ZDOTDIR:-$HOME} for zcompdump
     use_home_instead_of_zdotdir(["#{prezto}/runcoms/zlogin"])
 

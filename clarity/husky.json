@@ -1,0 +1,32 @@
+{
+  "config": {
+    "prevent-forbidden-code": {
+      "forbid": [
+        "console.log(",
+        "console.info(",
+        "console.error(",
+        "console.warn(",
+        "console.debug(",
+        "debugger",
+        "var_dump",
+        "print_r",
+        "fdescribe(",
+        "fit(",
+        "xdescribe(",
+        "xit(",
+        "ddescribe(",
+        "iit("
+      ],
+      "exclude": [
+        "package.json",
+        "*.md"
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prevent-forbidden-code",
+      "pre-push": "run -p lint test-headless \"ng -- build --prod\" "
+    }
+  }
+}

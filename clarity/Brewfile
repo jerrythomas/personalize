@@ -10,6 +10,7 @@ brew "wget"
 brew "libssh2"
 brew "p7zip"
 brew "libxml2"  # Required for tidyverse
+brew "jq"
 
 # Mac app store command line
 brew "mas"

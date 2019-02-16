@@ -95,10 +95,17 @@ function angular() {
   ng new $project --style=scss --routing
   cd $project
 
+  # Install missing peer dependencies (ajv)
+  npm install --save ajv
   ng add @angular/pwa
   ng add @angular/material
-  # Install missing peer dependencies (ajv)  
-  npm install --save @angular/material @angular/cdk @angular/animations hammerjs ajv
+
+  npm install --save @angular/material @angular/cdk @angular/animations hammerjs
+  # Safe coding
+  npm install --save husky prevent-forbidden-code
+  mv package.json package.json.old
+  jq -s '.[0] * .[1]' package.json.old $ZDOTDIR/.zprezto/runcoms/husky.json > package.json
+  rm -f package.json.old
 }
 
 # Upgrade all outdated global packages

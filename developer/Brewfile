@@ -1,5 +1,5 @@
 # Taps
-tap "caskroom/versions"
+tap "homebrew/cask-versions"
 tap "grpc/grpc"
 
 brew "jenv"
@@ -18,12 +18,9 @@ brew "go", args: ["cross-compile-common"]
 # Parallel processing
 brew "libomp"
 
-cask "atom"
-cask "visual-studio-code"
-cask "intellij-idea-ce"
 
 cask "java8"
-cask "drawio"
+#cask "drawio"
 
 
 #cask "devdocs"

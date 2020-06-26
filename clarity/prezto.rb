@@ -5,17 +5,17 @@ require 'fileutils'
 require 'optparse'
 require '../functions/add_variable'
 
-global = FALSE
-remove = FALSE
+global = false
+remove = false
 prompt = nil
 
 OptionParser.new do |opts|
     opts.banner = "Usage: prezto [options]"
     opts.on('--global', 'Configure prezto for all users') do
-      global = TRUE
+      global = true
     end
     opts.on('--remove', 'Remove prezto') do
-        remove = TRUE
+        remove = true
       end
     opts.on('-p [ARG]', '--prompt [ARG]', "Specify the prompt style to be used") do |v|
       prompt = v

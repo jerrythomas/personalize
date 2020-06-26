@@ -1,0 +1,7 @@
+tap "homebrew/cask-fonts"
+cask "font-fira-code"
+cask "font-firacode-nerd-font"
+# Cursive font Script 12 BT
+cask "./font-script12-bt.rb"
+cask "./font-codeiscript.rb"
+cask "font-montserrat"

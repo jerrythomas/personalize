@@ -12,9 +12,12 @@ export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
+# Editors
+export EDITOR=vi
+export GIT_EDITOR=vi
+
 # History settings
 export HISTFILE=$HOME/.zhistory
-export EDITOR=vi
 export HISTSIZE=50000
 export SAVEHIST=10000
 
@@ -28,23 +31,20 @@ then
 fi
 
 ## History command configuration
-setopt extended_history       # record timestamp of command in HISTFILE
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt inc_append_history     # add commands to HISTFILE in order of execution
-setopt share_history          # share command history data
+setopt EXTENDED_HISTORY       # record timestamp of command in HISTFILE
+setopt HIST_EXPIRE_DUPS_FIRST # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt HIST_IGNORE_DUPS       # ignore duplicated commands history list
+setopt HIST_IGNORE_ALL_DUPS   # ignore duplicated commands history list
+setopt HIST_IGNORE_SPACE      # ignore commands that start with space
+setopt HIST_VERIFY            # show command with history expansion to user before running it
+setopt INC_APPEND_HISTORY     # add commands to HISTFILE in order of execution
+setopt SHARE_HISTORY          # share command history data
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 # set private environment variables for project
 function dotenv {
-  script=".dotenv.sh"
-  if [ -f $script ]; then
-    rm -f $script
-  fi
-  sed -e 's/^/export /' .env > $script
-  . ./$script
-  rm -f $script
+  set -o allexport && source .env set +o allexport
 }
 
 function pyopencv {
@@ -79,14 +79,8 @@ function atom_package_list() {
   fi
 }
 
-function grep_history() {
-  if [ $# -eq 0 ]
-  then
-    history
-  else
-    WORDS="$@"
-    cat $HISTFILE | cut -d";" -f2 | grep "$WORDS"
-  fi
+function gh() {
+  fc -nl 0 | grep "$@"
 }
 
 # Create a fresh angular project with material theme
@@ -96,11 +90,11 @@ function angular() {
   cd $project
 
   # Install missing peer dependencies (ajv)
-  npm install --save ajv
-  ng add @angular/pwa
-  ng add @angular/material
+  # npm install --save ajv
+  # ng add @angular/pwa
+  # ng add @angular/material
 
-  npm install --save @angular/material @angular/cdk @angular/animations hammerjs
+  # npm install --save @angular/material @angular/cdk @angular/animations hammerjs
   # Safe coding
   npm install --save husky prevent-forbidden-code
   mv package.json package.json.old

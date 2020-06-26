@@ -5,12 +5,12 @@ brew "libpng"
 brew "libtiff"
 brew "openexr"
 cask "mactex"
-brew "h2o"
+#brew "h2o"
 brew "libxml2"  # required for tidyverse
 brew "udunits"  # required for ggforce
 brew "libgit2"  # required for git2r & devtools
-#brew "tcl-tk"  resolve tcltk R issue
+brew "tcl-tk"   # resolve tcltk R issue
 # R
 brew "R"
-tap "randy3k/r"
+tap "brewsci/base"
 brew "rstudio-server"

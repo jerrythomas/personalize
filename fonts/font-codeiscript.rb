@@ -7,6 +7,7 @@ cask 'font-codeiscript' do
   homepage 'https://github.com/kencrocken/FiraCodeiScript'
 
   font "#{staged_path}/FiraCodeiScript-Bold.ttf"
-  font "#{staged_path}/FiraCodeiScript-Bold.ttf"
-  font "#{staged_path}/Script12PitchBT.ttf"
+  font "#{staged_path}/FiraCodeiScript-Italic.ttf"
+  font "#{staged_path}/FiraCodeiScript-Regular.ttf"
+  #font "#{staged_path}/Script12PitchBT.ttf"
 end

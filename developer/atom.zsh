@@ -17,11 +17,11 @@ if [ $count -gt 0 ]; then
 fi
 
 # hydrogen requires python 2
-ver=`python -c 'import sys; print(".".join(map(str, sys.version_info[:1])))'`
-if [ $ver -ne 2 ]
-then
-   export PATH=`which python2`:$PATH
-fi
+#ver=`python -c 'import sys; print(".".join(map(str, sys.version_info[:1])))'`
+#if [ $ver -ne 2 ]
+#then
+#   export PATH=`which python2`:$PATH
+#fi
 
 apm install --packages-file atom-package-list.txt
 #cat vscode-extensions.txt | xargs -L 1 code --install-extension

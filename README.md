@@ -48,3 +48,20 @@ Minimal set of atom plugins
  cd ..
 
 ```
+
+How can I make it easier to configure and set up a mac machine quickly?
+
+A configuration UI to select the apps, libraries, fonts that need to be installed, customizations etc.
+
+Customizations:
+  * prezto
+  * zsh command prompt
+  * terminal colors
+  * syntax themes for vim, atom, other editors
+
+Apps and cli. Anything that is available on homebrew.
+
+Generate a yaml/json config file and push it to their github gist or any other publicly accessible url.
+commandline pull the config and setup the system.
+
+addon - custom scripts to extend.

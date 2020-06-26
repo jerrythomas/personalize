@@ -1,10 +1,3 @@
-tap "caskroom/fonts"
-cask "font-fira-code"
-cask "font-firacode-nerd-font"
-
-# Cursive font Script 12 BT
-cask "./font-script12-bt.rb"
-
 brew "rlwrap"
 brew "wget"
 brew "libssh2"

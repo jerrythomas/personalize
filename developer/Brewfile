@@ -18,7 +18,6 @@ brew "go", args: ["cross-compile-common"]
 # Parallel processing
 brew "libomp"
 
-
 cask "java8"
 #cask "drawio"
 

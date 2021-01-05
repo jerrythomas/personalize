@@ -42,6 +42,9 @@ setopt SHARE_HISTORY          # share command history data
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 # set private environment variables for project
 function dotenv {
   set -o allexport && source .env set +o allexport
@@ -99,3 +102,20 @@ function angular() {
 function ncu-g() {
   `ncu -g | grep "npm -g"`
 }
+
+function ssh_id(){
+  ID="$HOME/.ssh/$1"
+  if [ -f "$ID.pub" ]
+  then
+    ssh-add -D
+    ssh-add $ID
+  else
+    echo "No SSH identity found for $ID"
+  fi
+  ssh-add -l
+}
+
+function dcc() {
+  docker rmi -f $(docker images | grep "$1" | tr -s ' ' | cut -d ' ' -f 3)
+}
+source <(tkn completion zsh)

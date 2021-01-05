@@ -1,0 +1,24 @@
+--
+
+flutter:
+  category: brew   #brew/cask/mas/download
+  requires: # list of dependencies that are not handled by brew
+    - android-studio:
+        optional: false
+        plugins:
+          - flutter
+          - dart
+  postinstall: # actions to be taken after installation
+    - flutter doctor --android-licenses
+
+intellij-idea-ce:
+  category: cask
+  plugins:
+  - flutter
+  - dart
+
+# plugins and extensions that are recommended,
+
+theme:
+  - one-dark:
+      atom: .

@@ -1,0 +1,66 @@
+taps:
+  - grpc/grpc
+  - brewsci/base
+  - tilt-dev/tap
+  - flschweiger/flutter
+
+formulas:
+  - grpc:
+      args:
+        - --with-plugins
+      tap: grpc/grpc
+      tags:
+        - developer
+  - rstudio-server:
+      tap: brewsci/base
+      tags:
+        - data-science
+  - tilt:
+      tap: tilt-dev/tap
+      tags:
+        - developer
+        - cloud
+  - flutter:
+      tap: flschweiger/flutter
+      dependencies:
+        - android-studio
+      post-install:
+        - flutter doctor --android-licenses
+  - r:
+      tags: [data-science]
+  - pyenv:
+      tags: [developer, versions]
+  - rbenv:
+      tags: [developer, versions]
+  - jenv:
+      tags: [developer, versions]
+  - nvm:
+      tags: [developer, versions]
+  - docker:
+      tags: [developer, container]
+  - kind:
+      tags: [developer, container, cluster]
+  - kubernetes:
+      tags: [developer, container, cluster]
+  - rlwrap:
+      tags: [developer]
+  
+
+casks:
+  - android-studio
+  - intellij-idea-ce
+  - code
+  - atom
+  - chrome
+  - rstudio
+  - rstudio-server
+  - insomnia
+  - firefox
+
+plugins:
+  - intellij:
+      - release: https://github.com/one-dark/jetbrains-one-dark-theme/releases/latest
+        targets: [intellij, android-studio]
+  - atom:
+    - one-dark
+# Jerry

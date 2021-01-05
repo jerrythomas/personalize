@@ -4,11 +4,13 @@ class Flutter < Formula
 #  version ':latest'
 #  sha256 :no_check
   #head "https://github.com/flutter/flutter.git"
-  url "https://github.com/flutter/flutter.git",
-      :using => :git,
-      :tag => "v0.5.7",
-      :branch => "master",
-      :revision => "66091f969653fd3535b265ddcd87436901858a1d"
+  # url "https://github.com/flutter/flutter.git",
+  #     :using => :git,
+  #     :tag => "v1.20.1",
+  #     :branch => "master",
+  #     :revision => "66091f969653fd3535b265ddcd87436901858a1d"
+
+  https://storage.googleapis.com/flutter_infra/releases/stable/windows/flutter_windows_1.20.1-stable.zip
 
   option "without-visual-studio-code", "Disable Visual Studio Code."
   option "with-android-studio", "Enable Android Studio."

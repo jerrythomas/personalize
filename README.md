@@ -2,6 +2,24 @@
 
 A mini repo to quickly set up a new mac with my preferred settings.
 
+Configuration repo contains the following information.
+
+* Dependencies not handled by brew
+* Customizations like plugins and themes
+* Post-install steps
+  * shell completions
+  * environment and path variables
+* Shareable configurations
+* Select apps using categories or search and build your own set.
+* Recommended apps/optional configurations
+
+Example:
+  * prezto v/s oh-my-zsh
+  * Node Developer
+  * Java Developer
+  * Cloud Operations
+  *
+
 ### Basics
 
 * commandline tools
